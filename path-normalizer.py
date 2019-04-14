@@ -40,40 +40,18 @@ for line in open('./input2.txt','r').readlines():
       if reqPathComponents[0] == '':
           print(routes[ROOT_STR][ROUTE_STR]) if ROUTE_STR in routes[ROOT_STR] else print(NOTFOUND_STR)
       else:
-          #print('========================================================')
-          #print(reqPathComponents)
           currLevelPaths = [{PATH_STR: routes[ROOT_STR], STATIC_STR : True}]
-          #print(json.dumps(currLevelPaths))
-          num = 1
           for component in reqPathComponents:
               if not currLevelPaths: break
-              #print('--------------/')
-              #print(f'level {i}')5
-              #component = reqPathComponents[i]
-              #print(f'component: {component}')
-              #print(len(currLevelPaths))
               nextLevelPaths = []
               for pathDict in currLevelPaths:
                   route = pathDict[PATH_STR]
-                  #print('--------------//')
-                  #print(json.dumps(route))
                   if component in route:
-                      #print('found component')
-                      num += 1
                       nextLevelPaths.append({PATH_STR : route[component], STATIC_STR : pathDict[STATIC_STR]})
                   if WILDCARD_STR in route:
-                      #print('found wildcard')
-                      num += 1
                       nextLevelPaths.append({PATH_STR : route[WILDCARD_STR], STATIC_STR : False})
               currLevelPaths = nextLevelPaths
-              #print(len(currLevelPaths))
-          #print(json.dumps(currLevelPaths))
-          #print(json.dumps(currLevelPaths[0]))
-          #print(json.dumps(currLevelPaths[1]))
-          #print(json.dumps(currLevelPaths[2]))
-          print(lineStr[0])
-          print('num: ' , num)
-          print('comp len: ',len(reqPathComponents))
+
           if currLevelPaths:
               hasStaticPath = False
               for pathDict in currLevelPaths:
@@ -85,8 +63,4 @@ for line in open('./input2.txt','r').readlines():
                   print(currLevelPaths[0][PATH_STR][ROUTE_STR])
           else:
               print(NOTFOUND_STR)
-          print()
-          #print(currLevelPaths[0][ROUTE_STR]) if currLevelPaths else print(NOTFOUND_STR)
                   
-
-
